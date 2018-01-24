@@ -3,10 +3,11 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Example Component</div>
-
+                    <div class="panel-heading">
+                      <h4>请激活你的账户</h4>
+                    </div>
                     <div class="panel-body">
-                        I'm an example component!
+                      <strong>激活邮件已发送到你的邮箱，请点击激活链接激活你的用户</strong>
                     </div>
                 </div>
             </div>
@@ -17,7 +18,6 @@
 <script>
     export default {
         mounted() {
-            console.log('Component mounted.')
         }
     }
 </script>
