@@ -29,3 +29,5 @@ Route::get('/user', function(Request $request){
 Route::get('/house/read', function(){
     return 1;
 });
+
+Route::post('/register','RegisterController@register');

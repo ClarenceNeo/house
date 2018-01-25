@@ -54946,7 +54946,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this = this;
 
       var formData = {
-        name: this.name,
+        username: this.name,
         email: this.email,
         password: this.password
       };
