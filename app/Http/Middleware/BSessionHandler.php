@@ -11,7 +11,6 @@ class BSessionHandler
   {
     $session_name = 'authorization';
     $token = $request->get($session_name) ?: $request->header($session_name);
-    // dd($request->header($session_name));
 
     if ( ! $token || ! BS::valid($token)) {
       BS::generate();
