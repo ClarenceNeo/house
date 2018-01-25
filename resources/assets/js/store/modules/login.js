@@ -4,10 +4,15 @@ export default {
   actions: {
     loginRequest({dispatch}, formData){
       return axios.post('/api/login', formData).then(response => {
-        dispatch('loginSuccess',response.data)
+        if (response.data.status) {
+          dispatch('loginSuccess', response.data)
+        }else{
+          return response;
+        }
       })
     },
     loginSuccess({dispatch}, tokenResponse){
+      console.log(1);
       jwtToken.setToken(tokenResponse.token)
       dispatch('setAuthUser')
     },

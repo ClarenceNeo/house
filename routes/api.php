@@ -31,3 +31,4 @@ Route::get('/house/read', function(){
 });
 
 Route::post('/register','RegisterController@register');
+Route::post('/login','LoginController@login');

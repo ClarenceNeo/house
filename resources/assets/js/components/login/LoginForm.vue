@@ -61,13 +61,10 @@
             }
 
             this.$store.dispatch('loginRequest', formData).then(response => {
-              console.log(response);
               this.$router.push({name: 'profile'})
-            }).catch(error => {
-              if (error.response.status === 421) {
+              if (response.status === 421) {
                 this.bag.add('password', '邮箱和密码不相符', 'auth')
               }
-              // console.log(error.response.data)
             })
           }
         })

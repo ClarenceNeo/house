@@ -53742,7 +53742,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             user: response.data
           });
         }
-        console.log(response);
+        // console.log(response)
       }).catch(function (error) {
         // console.log(1)
         // dispatch('refreshToken')
@@ -53772,12 +53772,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var dispatch = _ref.dispatch;
 
       return axios.post('/api/login', formData).then(function (response) {
-        dispatch('loginSuccess', response.data);
+        if (response.data.status) {
+          dispatch('loginSuccess', response.data);
+        } else {
+          return response;
+        }
       });
     },
     loginSuccess: function loginSuccess(_ref2, tokenResponse) {
       var dispatch = _ref2.dispatch;
 
+      console.log(1);
       __WEBPACK_IMPORTED_MODULE_0__helpers_jwt__["a" /* default */].setToken(tokenResponse.token);
       dispatch('setAuthUser');
     },
@@ -55480,13 +55485,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           };
 
           _this.$store.dispatch('loginRequest', formData).then(function (response) {
-            console.log(response);
             _this.$router.push({ name: 'profile' });
-          }).catch(function (error) {
-            if (error.response.status === 421) {
+            if (response.status === 421) {
               _this.bag.add('password', '邮箱和密码不相符', 'auth');
             }
-            // console.log(error.response.data)
           });
         }
       });

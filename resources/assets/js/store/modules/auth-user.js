@@ -32,7 +32,7 @@ export default {
             user: response.data
           })
         }
-        console.log(response)
+        // console.log(response)
       }).catch(error => {
         // console.log(1)
         // dispatch('refreshToken')
