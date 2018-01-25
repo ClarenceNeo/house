@@ -9,10 +9,9 @@ class BSessionHandler
 {
   public function handle($request, Closure $next)
   {
-    // $res = $next($request);
-
-    $session_name = 'BSESSION_TOKEN';
+    $session_name = 'authorization';
     $token = $request->get($session_name) ?: $request->header($session_name);
+    // dd($request->header($session_name));
 
     if ( ! $token || ! BS::valid($token)) {
       BS::generate();
@@ -23,8 +22,6 @@ class BSessionHandler
     }
 
     BS::sync_to_cache();
-
-    // return $res;
     return $next($request);
   }
 }

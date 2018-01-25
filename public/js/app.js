@@ -22531,12 +22531,21 @@ window.Vue = __webpack_require__(14);
 
 axios.interceptors.request.use(function (config) {
   if (__WEBPACK_IMPORTED_MODULE_3__helpers_jwt__["a" /* default */].getToken()) {
-    // console.log(config);
-    config.headers['Authorization'] = 'Bearer' + ' ' + __WEBPACK_IMPORTED_MODULE_3__helpers_jwt__["a" /* default */].getToken();
+    config.headers['Authorization'] = __WEBPACK_IMPORTED_MODULE_3__helpers_jwt__["a" /* default */].getToken();
   }
   return config;
 }, function (error) {
   return Promise.reject(error);
+});
+
+axios.interceptors.response.use(function (response) {
+  var token = response.headers.authorization;
+  if (token) {
+    __WEBPACK_IMPORTED_MODULE_3__helpers_jwt__["a" /* default */].setToken(token);
+  }
+  return response;
+}, function (error) {
+  return Promise.resolve(error.response);
 });
 
 __WEBPACK_IMPORTED_MODULE_6_vee_validate__["b" /* Validator */].localize('zh_CN', __WEBPACK_IMPORTED_MODULE_5__locale_zh_CN__["a" /* default */]);

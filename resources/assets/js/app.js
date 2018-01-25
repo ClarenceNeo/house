@@ -1,37 +1,46 @@
 
- require('./bootstrap');
+require('./bootstrap');
 
- window.Vue = require('vue');
+window.Vue = require('vue')
 
- import VueRouter from 'vue-router'
- import router from './routes'
- import store from './store/index'
- import jwtToken from './helpers/jwt'
- import App from './components/App'
+import VueRouter from 'vue-router'
+import router from './routes'
+import store from './store/index'
+import jwtToken from './helpers/jwt'
+import App from './components/App'
 
- import zh_CN from './locale/zh_CN';
- import VeeValidate, { Validator } from 'vee-validate';
+import zh_CN from './locale/zh_CN'
+import VeeValidate, { Validator } from 'vee-validate'
 
- axios.interceptors.request.use(function (config) {
-   if (jwtToken.getToken()) {
-     // console.log(config);
-     config.headers['Authorization'] = 'Bearer' + ' ' + jwtToken.getToken();
-   }
-   return config;
-  }, function (error) {
-    return Promise.reject(error);
-  });
+axios.interceptors.request.use(function (config) {
+  if (jwtToken.getToken()) {
+    config.headers['Authorization'] = jwtToken.getToken()
+  }
+  return config
+}, function (error) {
+  return Promise.reject(error)
+})
 
- Validator.localize('zh_CN', zh_CN);
+axios.interceptors.response.use(response => {
+  let token = response.headers.authorization;
+  if (token) {
+    jwtToken.setToken(token)
+  }
+  return response
+}, error => {
+  return Promise.resolve(error.response)
+})
 
- Vue.use(VueRouter)
- Vue.use(VeeValidate, {
-   locale: 'zh_CN'
- })
- Vue.component('app', App)
+Validator.localize('zh_CN', zh_CN);
 
- new Vue({
-   el: '#app',
-   router,
-   store
- });
+Vue.use(VueRouter)
+Vue.use(VeeValidate, {
+  locale: 'zh_CN'
+})
+Vue.component('app', App)
+
+new Vue({
+  el: '#app',
+  router,
+  store
+})
