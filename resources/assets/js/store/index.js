@@ -16,5 +16,6 @@ export default new Vuex.Store({
     EditProfile,
     EditPassword,
     Notification
-  }
+  },
+  strict: true
 })

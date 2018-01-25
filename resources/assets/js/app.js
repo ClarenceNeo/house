@@ -14,7 +14,7 @@ import VeeValidate, { Validator } from 'vee-validate'
 
 axios.interceptors.request.use(function (config) {
   if (jwtToken.getToken()) {
-    config.headers['Authorization'] = jwtToken.getToken()
+    config.headers['BSession'] = jwtToken.getToken()
   }
   return config
 }, function (error) {
@@ -22,7 +22,7 @@ axios.interceptors.request.use(function (config) {
 })
 
 axios.interceptors.response.use(response => {
-  let token = response.headers.authorization;
+  let token = response.headers.bsession;
   if (token) {
     jwtToken.setToken(token)
   }

@@ -22490,7 +22490,8 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
     EditProfile: __WEBPACK_IMPORTED_MODULE_4__modules_edit_profile__["a" /* default */],
     EditPassword: __WEBPACK_IMPORTED_MODULE_5__modules_edit_password__["a" /* default */],
     Notification: __WEBPACK_IMPORTED_MODULE_6__modules_notification__["a" /* default */]
-  }
+  },
+  strict: true
 }));
 
 /***/ }),
@@ -22531,7 +22532,7 @@ window.Vue = __webpack_require__(14);
 
 axios.interceptors.request.use(function (config) {
   if (__WEBPACK_IMPORTED_MODULE_3__helpers_jwt__["a" /* default */].getToken()) {
-    config.headers['Authorization'] = __WEBPACK_IMPORTED_MODULE_3__helpers_jwt__["a" /* default */].getToken();
+    config.headers['BSession'] = __WEBPACK_IMPORTED_MODULE_3__helpers_jwt__["a" /* default */].getToken();
   }
   return config;
 }, function (error) {
@@ -22539,7 +22540,7 @@ axios.interceptors.request.use(function (config) {
 });
 
 axios.interceptors.response.use(function (response) {
-  var token = response.headers.authorization;
+  var token = response.headers.bsession;
   if (token) {
     __WEBPACK_IMPORTED_MODULE_3__helpers_jwt__["a" /* default */].setToken(token);
   }
@@ -53640,13 +53641,13 @@ var routes = [{
 }, {
   path: '/register',
   name: 'register',
-  component: __webpack_require__(69)
-  // meta: { requiresGuest: true }
+  component: __webpack_require__(69),
+  meta: { requiresGuest: true }
 }, {
   path: '/login',
   name: 'login',
-  component: __webpack_require__(75)
-  // meta: { requiresGuest: true }
+  component: __webpack_require__(75),
+  meta: { requiresGuest: true }
 }, {
   path: '/confirm',
   name: 'confirm',
@@ -53681,14 +53682,14 @@ var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
 
 router.beforeEach(function (to, from, next) {
   if (to.meta.requiresAuth) {
-    if (__WEBPACK_IMPORTED_MODULE_1__store_index__["a" /* default */].state.AuthUser.authenticated || __WEBPACK_IMPORTED_MODULE_2__helpers_jwt__["a" /* default */].getToken()) {
+    if (__WEBPACK_IMPORTED_MODULE_1__store_index__["a" /* default */].state.AuthUser.authenticated) {
       return next();
     } else {
       return next({ 'name': 'login' });
     }
   }
   if (to.meta.requiresGuest) {
-    if (__WEBPACK_IMPORTED_MODULE_1__store_index__["a" /* default */].state.AuthUser.authenticated || __WEBPACK_IMPORTED_MODULE_2__helpers_jwt__["a" /* default */].getToken()) {
+    if (__WEBPACK_IMPORTED_MODULE_1__store_index__["a" /* default */].state.AuthUser.authenticated) {
       return next({ 'name': 'home' });
     } else {
       return next();
@@ -53735,12 +53736,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           dispatch = _ref.dispatch;
 
       return axios.get('/api/user').then(function (response) {
-        commit({
-          type: __WEBPACK_IMPORTED_MODULE_0__mutation_type__["b" /* SET_AUTH_USER */],
-          user: response.data
-        });
+        if (response.data) {
+          commit({
+            type: __WEBPACK_IMPORTED_MODULE_0__mutation_type__["b" /* SET_AUTH_USER */],
+            user: response.data
+          });
+        }
+        console.log(response);
       }).catch(function (error) {
-        dispatch('refreshToken');
+        // console.log(1)
+        // dispatch('refreshToken')
       });
     },
     unsetAuthUser: function unsetAuthUser(_ref2) {
@@ -53748,16 +53753,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       commit({
         type: __WEBPACK_IMPORTED_MODULE_0__mutation_type__["d" /* UNSET_AUTH_USER */]
-      });
-    },
-    refreshToken: function refreshToken(_ref3) {
-      var commit = _ref3.commit,
-          dispatch = _ref3.dispatch;
-
-      return axios.post('/api/refresh').then(function (response) {
-        dispatch('loginSuccess', response.data);
-      }).catch(function (error) {
-        dispatch('logoutRequest');
       });
     }
   }
@@ -55485,6 +55480,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           };
 
           _this.$store.dispatch('loginRequest', formData).then(function (response) {
+            console.log(response);
             _this.$router.push({ name: 'profile' });
           }).catch(function (error) {
             if (error.response.status === 421) {

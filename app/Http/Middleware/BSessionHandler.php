@@ -9,7 +9,7 @@ class BSessionHandler
 {
   public function handle($request, Closure $next)
   {
-    $session_name = 'authorization';
+    $session_name = 'bsession';
     $token = $request->get($session_name) ?: $request->header($session_name);
 
     if ( ! $token || ! BS::valid($token)) {

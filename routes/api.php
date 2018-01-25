@@ -17,6 +17,15 @@ use Illuminate\Http\Request;
 //     return $request->user();
 // });
 
+Route::get('/user', function(Request $request){
+    // return null;
+    // return response()->json([
+    //         'status' => false,
+    //         'authenticated' => false,
+    //         'message' => 'Credentials not match'
+    //     ],421);
+});
+
 Route::get('/house/read', function(){
     return 1;
 });
