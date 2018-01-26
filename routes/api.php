@@ -18,14 +18,11 @@ use Illuminate\Http\Request;
 // });
 
 Route::get('/user', function(Request $request){
-    dd($GLOBALS['__BSESSION__']['user']);
     $user = $GLOBALS['__BSESSION__']['user'];
-    // return null;
-    // return response()->json([
-    //         'status' => false,
-    //         'authenticated' => false,
-    //         'message' => 'Credentials not match'
-    //     ],421);
+    if (!$user){
+        return null;
+    }
+    return response()->json($user);
 });
 
 Route::get('/house/read', function(){
@@ -34,3 +31,4 @@ Route::get('/house/read', function(){
 
 Route::post('/register','RegisterController@register');
 Route::post('/login','LoginController@login');
+Route::post('/logout','LoginController@logout');

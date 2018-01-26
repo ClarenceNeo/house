@@ -31,7 +31,13 @@ class LoginController extends Controller
         return response()->json([
                 'status' => true,
                 'data' => $GLOBALS['__BSESSION__']['meta']
-            ]);
+        ],200);
+    }
+
+    public function logout()
+    {
+        $s_id = $GLOBALS['__BSESSION__']['meta']['id'];
+        BS::where(['id' => $s_id])->delete();
     }
 
     public function sync_to_session(array $user)

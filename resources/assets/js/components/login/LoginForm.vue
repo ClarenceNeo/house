@@ -61,7 +61,9 @@
             }
 
             this.$store.dispatch('loginRequest', formData).then(response => {
-              this.$router.push({name: 'profile'})
+              if (response.status === 200) {
+                this.$router.push({name: 'profile'})
+              }
               if (response.status === 421) {
                 this.bag.add('password', '邮箱和密码不相符', 'auth')
               }

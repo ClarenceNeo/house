@@ -22467,11 +22467,13 @@ if (inBrowser && window.Vue) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_auth_user__ = __webpack_require__(46);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_login__ = __webpack_require__(47);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modules_edit_profile__ = __webpack_require__(48);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__modules_edit_password__ = __webpack_require__(49);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__modules_notification__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_router__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_auth_user__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modules_login__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__modules_edit_profile__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__modules_edit_password__ = __webpack_require__(49);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__modules_notification__ = __webpack_require__(50);
+
 
 
 
@@ -22482,14 +22484,15 @@ if (inBrowser && window.Vue) {
 
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */]);
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue_router__["a" /* default */]);
 
 /* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
   modules: {
-    AuthUser: __WEBPACK_IMPORTED_MODULE_2__modules_auth_user__["a" /* default */],
-    Login: __WEBPACK_IMPORTED_MODULE_3__modules_login__["a" /* default */],
-    EditProfile: __WEBPACK_IMPORTED_MODULE_4__modules_edit_profile__["a" /* default */],
-    EditPassword: __WEBPACK_IMPORTED_MODULE_5__modules_edit_password__["a" /* default */],
-    Notification: __WEBPACK_IMPORTED_MODULE_6__modules_notification__["a" /* default */]
+    AuthUser: __WEBPACK_IMPORTED_MODULE_3__modules_auth_user__["a" /* default */],
+    Login: __WEBPACK_IMPORTED_MODULE_4__modules_login__["a" /* default */],
+    EditProfile: __WEBPACK_IMPORTED_MODULE_5__modules_edit_profile__["a" /* default */],
+    EditPassword: __WEBPACK_IMPORTED_MODULE_6__modules_edit_password__["a" /* default */],
+    Notification: __WEBPACK_IMPORTED_MODULE_7__modules_notification__["a" /* default */]
   },
   strict: true
 }));
@@ -53682,11 +53685,12 @@ var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
 
 router.beforeEach(function (to, from, next) {
   if (to.meta.requiresAuth) {
-    if (__WEBPACK_IMPORTED_MODULE_1__store_index__["a" /* default */].state.AuthUser.authenticated) {
-      return next();
-    } else {
-      return next({ 'name': 'login' });
-    }
+    return next();
+    // if (Store.state.AuthUser.authenticated) {
+    //     return next()
+    // } else {
+    //     return next({'name': 'login'})
+    // }
   }
   if (to.meta.requiresGuest) {
     if (__WEBPACK_IMPORTED_MODULE_1__store_index__["a" /* default */].state.AuthUser.authenticated) {
@@ -53723,7 +53727,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     state.name = payload.value;
   }), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_type__["b" /* SET_AUTH_USER */], function (state, payload) {
     state.authenticated = true;
-    state.name = payload.user.name;
+    state.name = payload.user.username;
     state.email = payload.user.email;
   }), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_type__["d" /* UNSET_AUTH_USER */], function (state, payload) {
     state.authenticated = false;
@@ -53742,7 +53746,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             user: response.data
           });
         }
-        // console.log(response)
       }).catch(function (error) {
         // console.log(1)
         // dispatch('refreshToken')
@@ -53773,7 +53776,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       return axios.post('/api/login', formData).then(function (response) {
         if (response.data.status) {
-          dispatch('loginSuccess', response.data);
+          dispatch('loginSuccess', response.data.data);
+          return response;
         } else {
           return response;
         }
@@ -53782,7 +53786,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     loginSuccess: function loginSuccess(_ref2, tokenResponse) {
       var dispatch = _ref2.dispatch;
 
-      console.log(1);
       __WEBPACK_IMPORTED_MODULE_0__helpers_jwt__["a" /* default */].setToken(tokenResponse.token);
       dispatch('setAuthUser');
     },
@@ -55485,7 +55488,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           };
 
           _this.$store.dispatch('loginRequest', formData).then(function (response) {
-            _this.$router.push({ name: 'profile' });
+            if (response.status === 200) {
+              _this.$router.push({ name: 'profile' });
+            }
             if (response.status === 421) {
               _this.bag.add('password', '邮箱和密码不相符', 'auth');
             }

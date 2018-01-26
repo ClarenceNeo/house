@@ -91,11 +91,12 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
     if (to.meta.requiresAuth) {
-        if (Store.state.AuthUser.authenticated) {
-            return next()
-        } else {
-            return next({'name': 'login'})
-        }
+        return next();
+        // if (Store.state.AuthUser.authenticated) {
+        //     return next()
+        // } else {
+        //     return next({'name': 'login'})
+        // }
     }
     if (to.meta.requiresGuest) {
         if (Store.state.AuthUser.authenticated) {

@@ -14,7 +14,7 @@ export default {
     },
     [types.SET_AUTH_USER](state, payload){
       state.authenticated = true
-      state.name = payload.user.name
+      state.name = payload.user.username
       state.email = payload.user.email
     },
     [types.UNSET_AUTH_USER](state, payload){
@@ -32,7 +32,6 @@ export default {
             user: response.data
           })
         }
-        console.log(response)
       }).catch(error => {
         // console.log(1)
         // dispatch('refreshToken')
