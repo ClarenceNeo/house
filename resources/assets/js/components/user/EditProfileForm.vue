@@ -62,11 +62,13 @@
     methods: {
       updateProfile(){
         const formData = {
-          name: this.name,
+          username: this.name,
           email: this.email
         }
         this.$store.dispatch('updateProfileRequest',formData).then(response => {
-          this.$router.push({name: 'profile'})
+          if (response.data.status) {
+            this.$router.push({name: 'profile'})
+          }
         }).catch(error => {
 
         })

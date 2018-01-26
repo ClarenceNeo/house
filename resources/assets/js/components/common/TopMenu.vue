@@ -15,7 +15,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class=""><router-link to="/"> 首页 </router-link></li>
-        <li class=""><router-link to="/admin"> 后台 </router-link></li>
+        <li class="" v-if="user.permission == 'admin'"><router-link to="/admin"> 后台 </router-link></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <router-link v-if="!user.authenticated" to="/login" tag="li">

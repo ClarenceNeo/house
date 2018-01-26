@@ -43,7 +43,9 @@
             }
 
             this.$store.dispatch('updatePasswordRequest', formData).then(response => {
-              // this.$router.push({name: 'profile'})
+              if (response.status) {
+                this.$router.push({name: 'profile'}) 
+              }
               // console.log('Success!');
             }).catch(error => {
 

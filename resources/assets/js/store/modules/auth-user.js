@@ -16,11 +16,13 @@ export default {
       state.authenticated = true
       state.name = payload.user.username
       state.email = payload.user.email
+      state.permission = payload.user.permission
     },
     [types.UNSET_AUTH_USER](state, payload){
       state.authenticated = false
       state.name = null
       state.email = null
+      state.permission = null
     }
   },
   actions : {

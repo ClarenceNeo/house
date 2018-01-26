@@ -27,8 +27,11 @@ Route::get('/user', function(Request $request){
 
 Route::get('/house/read', function(){
     return 1;
-})->middleware('admin');
+});
 
 Route::post('/register','RegisterController@register');
 Route::post('/login','LoginController@login');
 Route::post('/logout','LoginController@logout');
+
+Route::post('/userProfileUpdate', 'ProfileController@update');
+Route::post('/userPasswordUpdate', 'PasswordController@update');
