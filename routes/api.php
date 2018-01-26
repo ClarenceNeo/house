@@ -27,7 +27,7 @@ Route::get('/user', function(Request $request){
 
 Route::get('/house/read', function(){
     return 1;
-});
+})->middleware('admin');
 
 Route::post('/register','RegisterController@register');
 Route::post('/login','LoginController@login');
