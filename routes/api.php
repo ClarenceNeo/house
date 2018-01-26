@@ -18,6 +18,8 @@ use Illuminate\Http\Request;
 // });
 
 Route::get('/user', function(Request $request){
+    dd($GLOBALS['__BSESSION__']['user']);
+    $user = $GLOBALS['__BSESSION__']['user'];
     // return null;
     // return response()->json([
     //         'status' => false,

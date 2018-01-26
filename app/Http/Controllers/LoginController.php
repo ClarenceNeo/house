@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use \App\Bsession as BS;
 
 class LoginController extends Controller
 {
@@ -37,6 +38,8 @@ class LoginController extends Controller
     {
         if ( ! $user['id'])
             return false;
+        $s_id = $GLOBALS['__BSESSION__']['meta']['id'];
+        BS::where(['id' => $s_id])->update(['user_id' => $user['id']]);
         array_set($GLOBALS['__BSESSION__'], 'user', $user);
     }
 }

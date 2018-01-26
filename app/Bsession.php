@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Mockery\Exception;
+use App\User;
 
 class Bsession extends Model
 {
@@ -57,7 +58,7 @@ class Bsession extends Model
 
     $cache = [
       'meta' => $arr,
-      'user' => $meta->user_id ? User::find($meta->user_id) : null,
+      'user' => $meta->user_id ? User::find($meta->user_id)->toArray() : null,
       'data' => $meta->data ?: [],
     ];
 
