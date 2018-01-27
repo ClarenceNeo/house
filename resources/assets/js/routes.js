@@ -27,6 +27,12 @@ let routes = [
       },
     ],
     meta: {}
+  }, 
+  {
+    path: '/house/add',
+    name: 'houseAdd',
+    component: require('./components/common/HouseAdd'),
+    meta: {}
   },
   {
     path: 'admin/house/:id',

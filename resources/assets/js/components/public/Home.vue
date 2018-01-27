@@ -19,6 +19,7 @@
 <script>
     export default {
         mounted() {
+            console.log(this.$store)
             axios.get('/api/house/read').then(r => {
               this.houses = r.data.data;
             })

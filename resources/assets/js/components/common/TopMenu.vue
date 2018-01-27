@@ -24,6 +24,9 @@
         <router-link v-if="!user.authenticated" to="/register" tag="li">
           <a>注册</a>
         </router-link>
+        <router-link v-if="user.authenticated" to="/house/add" tag="li">
+          <a>发布房源</a>
+        </router-link>
         <router-link v-if="user.authenticated" to="/profile" tag="li">
           <a>个人主页</a>
         </router-link>
