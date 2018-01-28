@@ -35,3 +35,5 @@ Route::post('/logout','LoginController@logout');
 
 Route::post('/userProfileUpdate', 'ProfileController@update');
 Route::post('/userPasswordUpdate', 'PasswordController@update');
+
+Route::post('/uploadImg', 'UploadController@upload');
