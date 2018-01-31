@@ -1,6 +1,7 @@
 <template>
   <div>
     <top-menu></top-menu>
+    <!-- <top-nav></top-nav> -->
     <notification></notification>
     <transition name="fade" mode="out-in">
       <router-view></router-view>
@@ -12,6 +13,7 @@
   import TopMenu from './common/TopMenu'
   import Notification from './common/Notification'
   import jwtToken from './../helpers/jwt'
+  // import TopNav from './common/TopNav'
   export default {
     created(){
       if (jwtToken.getToken()) {
@@ -20,7 +22,8 @@
     },
     components: {
       TopMenu,
-      Notification
+      Notification,
+      // TopNav
     },
     mounted(){
     }

@@ -1,14 +1,11 @@
 <template>
     <div class="container">
-        <h2>发布房源</h2>
-        <!-- <upload></upload> -->
-        <test></test>
+        <house-form></house-form>
     </div>
 </template>
 
 <script>
-import Upload from './../upload/EL_upload'
-import Test from './../upload/Test'
+import HouseForm from './../form/house_form'
 export default {
   data() {
       return {
@@ -18,8 +15,7 @@ export default {
   methods: {
   },
   components: {
-    Upload,
-    Test
+    HouseForm
   }
 }
 </script>

@@ -28,7 +28,20 @@
           <a>发布房源</a>
         </router-link>
         <router-link v-if="user.authenticated" to="/profile" tag="li">
-          <a>个人主页</a>
+          <!-- <a>{{user.name}}</a> -->
+          <a class="dropdown">
+          <button id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            {{user.name}}
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+          </ul>
+          </a>
         </router-link>
         <li  v-if="user.authenticated">
           <a @click.prevent="logout" href="#">退出</a>

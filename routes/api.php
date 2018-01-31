@@ -36,4 +36,7 @@ Route::post('/logout','LoginController@logout');
 Route::post('/userProfileUpdate', 'ProfileController@update');
 Route::post('/userPasswordUpdate', 'PasswordController@update');
 
-Route::post('/uploadImg', 'UploadController@upload');
+Route::any('/uploadImg', 'UploadController@upload');
+
+Route::post('/house/add', 'HouseController@add');
+Route::any('/house/read', 'HouseController@read');

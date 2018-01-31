@@ -4,11 +4,11 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                      <h4>{{house.id}}</h4>
+                      <h4>{{house.title}}</h4>
                     </div>
                     <div class="panel-body">
                       <div class="bs-callout bs-callout-danger">
-                        <p>{{ house.title }}</p>
+                        <p>{{ house.cover }}</p>
                       </div>
                     </div>
                 </div>
@@ -20,8 +20,9 @@
 <script>
     export default {
         mounted() {
+            console.log(1);
             axios.post('/api/house/read', { id: this.$route.params.id } ).then(r => {
-              this.house = r.data.data;
+              this.house = r.data;
             })
         },
         data(){
