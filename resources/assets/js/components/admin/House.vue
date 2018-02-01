@@ -1,43 +1,91 @@
 <template>
-    <div class="container">
-      <table class="table table-striped table-hover ">
-        <thead>
-        <tr>
-          <th>id</th>
-          <th>标题</th>
-          <th>操作</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr v-for="item in houses">
-          <td>{{item.id}}</td>
-          <td>{{item.title}}</td>
-          <td>
-            <button><router-link :to="{ name: 'house-form', params: { id: item.id }}">更新</router-link></button>
-            <button @click="deleteItem(item.id)">删除</button>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
+  <el-table
+    :data="tableData"
+    border
+    style="width: 100%">
+    <el-table-column
+      fixed
+      prop="date"
+      label="日期"
+      width="150">
+    </el-table-column>
+    <el-table-column
+      prop="name"
+      label="姓名"
+      width="120">
+    </el-table-column>
+    <el-table-column
+      prop="province"
+      label="省份"
+      width="120">
+    </el-table-column>
+    <el-table-column
+      prop="city"
+      label="市区"
+      width="120">
+    </el-table-column>
+    <el-table-column
+      prop="address"
+      label="地址"
+      width="300">
+    </el-table-column>
+    <el-table-column
+      prop="zip"
+      label="邮编"
+      width="120">
+    </el-table-column>
+    <el-table-column
+      fixed="right"
+      label="操作"
+      width="100">
+      <template slot-scope="scope">
+        <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
+        <el-button type="text" size="small">编辑</el-button>
+      </template>
+    </el-table-column>
+  </el-table>
 </template>
 
 <script>
-    export default {
-        mounted() {
-            axios.get('/api/house/read').then(r => {
-              this.houses = r.data.data;
-            })
-        },
-        data(){
-          return {
-            houses: []
-          }
-        },
-        methods: {
-          deleteItem(id){
-            console.log(id);
-          }
-        }
+  export default {
+    methods: {
+      handleClick(row) {
+        console.log(row);
+      }
+    },
+
+    data() {
+      return {
+        tableData: [{
+          date: '2016-05-03',
+          name: '王小虎',
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1518 弄',
+          zip: 200333
+        }, {
+          date: '2016-05-02',
+          name: '王小虎',
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1518 弄',
+          zip: 200333
+        }, {
+          date: '2016-05-04',
+          name: '王小虎',
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1518 弄',
+          zip: 200333
+        }, {
+          date: '2016-05-01',
+          name: '王小虎',
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1518 弄',
+          zip: 200333
+        }]
+      }
     }
+  }
 </script>

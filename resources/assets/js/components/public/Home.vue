@@ -1,7 +1,7 @@
 <template>
     <div>
         <el-row :gutter="20">
-            <el-col v-for="row in houses" :key="row.id" :xs="12" :sm="8" :md="8" :lg="6" :xl="6">
+            <el-col v-for="row in houses" :key="row.id" :xs="12" :sm="8" :md="8" :lg="8" :xl="8">
                 <div class="grid-content bg-purple">
                     <router-link :to="{ name: 'house', params: { id: row.id }}">
                         <house-card v-bind:item="row"></house-card>

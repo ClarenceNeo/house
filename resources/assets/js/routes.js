@@ -11,7 +11,7 @@ let routes = [
   },
   {
     path: '/admin',
-    component: require('./components/admin/AdminWrapper'),
+    component: require('./components/admin/AdminWrap'),
     children: [
       {
         path: '',
