@@ -1,23 +1,12 @@
 <template>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                      <h4>{{house.title}}</h4>
-                    </div>
-                    <div class="panel-body">
-                      <div class="bs-callout bs-callout-danger">
-                        <p>{{ house.cover }}</p>
-                      </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="wrap">
+        <!-- <carousel></carousel> -->
+        
     </div>
 </template>
 
 <script>
+    import Carousel from "./../house/Carousel";
     export default {
         mounted() {
             console.log(1);
@@ -29,6 +18,9 @@
           return {
             house: {}
           }
+        },
+        components: {
+            Carousel
         }
     }
 </script>
