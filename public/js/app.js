@@ -61072,6 +61072,8 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__house_Carousel__ = __webpack_require__(165);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__house_Carousel___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__house_Carousel__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__house_TabCard__ = __webpack_require__(315);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__house_TabCard___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__house_TabCard__);
 //
 //
 //
@@ -61079,6 +61081,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -61097,7 +61100,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     components: {
-        Carousel: __WEBPACK_IMPORTED_MODULE_0__house_Carousel___default.a
+        Carousel: __WEBPACK_IMPORTED_MODULE_0__house_Carousel___default.a,
+        TabCard: __WEBPACK_IMPORTED_MODULE_1__house_TabCard___default.a
     }
 });
 
@@ -61245,7 +61249,12 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "wrap" })
+  return _c(
+    "div",
+    { staticClass: "wrap" },
+    [_c("carousel"), _vm._v(" "), _c("tab-card")],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -104873,6 +104882,138 @@ var isDefinedGlobally = function isDefinedGlobally() {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 309 */,
+/* 310 */,
+/* 311 */,
+/* 312 */,
+/* 313 */,
+/* 314 */,
+/* 315 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(316)
+/* template */
+var __vue_template__ = __webpack_require__(317)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/house/TabCard.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-c30b76a2", Component.options)
+  } else {
+    hotAPI.reload("data-v-c30b76a2", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 316 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      activeName: 'first'
+    };
+  },
+
+  methods: {
+    handleClick: function handleClick(tab, event) {
+      console.log(tab, event);
+    }
+  }
+});
+
+/***/ }),
+/* 317 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "el-tabs",
+    {
+      on: { "tab-click": _vm.handleClick },
+      model: {
+        value: _vm.activeName,
+        callback: function($$v) {
+          _vm.activeName = $$v
+        },
+        expression: "activeName"
+      }
+    },
+    [
+      _c("el-tab-pane", { attrs: { label: "详情", name: "first" } }, [
+        _vm._v("详情")
+      ]),
+      _vm._v(" "),
+      _c("el-tab-pane", { attrs: { label: "位置", name: "second" } }, [
+        _vm._v("位置")
+      ]),
+      _vm._v(" "),
+      _c("el-tab-pane", { attrs: { label: "须知", name: "third" } }, [
+        _vm._v("须知")
+      ]),
+      _vm._v(" "),
+      _c("el-tab-pane", { attrs: { label: "联系人", name: "fourth" } }, [
+        _vm._v("联系人")
+      ])
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-c30b76a2", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
